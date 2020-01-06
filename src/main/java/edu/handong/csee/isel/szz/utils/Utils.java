@@ -1,7 +1,10 @@
 package edu.handong.csee.isel.szz.utils;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.eclipse.jdt.core.dom.Comment;
 import org.eclipse.jgit.diff.DiffAlgorithm;
@@ -87,6 +90,16 @@ public class Utils {
 		diffList.addAll(diffAlgorithm
 				.diff(diffComparator, rt1, rt2));
 		return diffList;
+	}
+	
+	public static String getStringDateTimeFromCommitTime(int commitTime){
+		SimpleDateFormat ft =  new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+		Date commitDate = new Date(commitTime* 1000L); //sec to millisec
+
+		TimeZone GMT = TimeZone.getTimeZone("GMT");
+		ft.setTimeZone(GMT);
+
+		return ft.format(commitDate);
 	}
 
 
